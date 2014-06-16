@@ -1,6 +1,6 @@
-# Brainfuck, Hodor, Hodor
+# Brainfuck, OokOok, Hodor
 
-Yet another interpreter for Brainfuck and Hodor Hodor, written in Haskell.
+Yet another interpreter for Brainfuck and Ook Ook, written in Haskell.
 
 ## What is this Hodor language ?
 
