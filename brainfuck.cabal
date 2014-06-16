@@ -1,0 +1,38 @@
+name:               brainfuck
+version:            0.1.0.0
+description:        brainfuck interpreter
+license:            GPL-3
+license-file:       LICENSE
+author:             Remi Berson
+maintainer:         remi.berson@gmail.com
+category:           Language
+build-type:         Simple
+cabal-version:      >=1.10
+
+library
+    ghc-options:        -O2 -Wall
+    default-language:   Haskell2010
+    hs-source-dirs:     src
+    exposed-modules:
+        Language.Brainfuck.Brainfuck
+        Language.Brainfuck.OokOok
+        Language.Brainfuck.Hodor
+        Language.Brainfuck.Instructions
+        Language.Brainfuck.Interpreter
+    build-depends:
+          base >= 4.5 && < 4.8
+        , text
+        , parsec
+        , mtl
+        , ListZipper
+
+executable brainfuck
+    main-is:            Main.hs
+    hs-source-dirs:     src
+    ghc-options:        -O2 -Wall
+    default-language:   Haskell2010
+    build-depends:
+            base >= 4.5 && < 4.8
+          , parsec
+          , text
+          , mtl
