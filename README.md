@@ -1,4 +1,4 @@
-# One Brainfuck interpreter to rule them all!
+# A Brainfuck interpreter to rule them all!
 
 Yet another interpreter for Brainfuck dialects:
 
@@ -6,6 +6,8 @@ Yet another interpreter for Brainfuck dialects:
 * OokOok
 * WoopWoop
 * Hodor
+
+With a common backend, a custom parsers is needed to create a new dialect (with facilities to create a new one).
 
 ## What is this Hodor language ?
 
