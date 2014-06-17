@@ -1,5 +1,5 @@
 
-module Language.Brainfuck.Woop where
+module Language.Brainfuck.WoopWoop where
 
 import Prelude hiding (read, print)
 

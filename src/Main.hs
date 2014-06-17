@@ -11,6 +11,7 @@ import Language.Brainfuck.Interpreter
 import qualified Language.Brainfuck.Brainfuck as BF
 import qualified Language.Brainfuck.OokOok as OO
 import qualified Language.Brainfuck.Hodor as H
+import qualified Language.Brainfuck.WoopWoop as W
 
 
 main :: IO ()
@@ -25,4 +26,5 @@ main = do
             "Brainfuck" -> BF.program
             "OokOok" -> OO.program
             "Hodor" -> H.program
+            "WoopWoop" -> W.program
             _ -> error "Not a known language"

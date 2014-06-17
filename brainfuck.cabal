@@ -17,6 +17,7 @@ library
         Language.Brainfuck.Brainfuck
         Language.Brainfuck.OokOok
         Language.Brainfuck.Hodor
+        Language.Brainfuck.WoopWoop
         Language.Brainfuck.Instructions
         Language.Brainfuck.Interpreter
     build-depends:
