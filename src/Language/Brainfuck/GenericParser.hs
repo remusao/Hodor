@@ -8,6 +8,7 @@ import Data.Maybe (catMaybes)
 import Text.ParserCombinators.Parsec
 import Language.Brainfuck.Instructions
 
+-- Record type containing symbols of Brainfuck language
 data Symbols = Symbols {
     incr :: String,
     decr :: String,
@@ -23,7 +24,10 @@ data Symbols = Symbols {
 -- Used to generate a parser for a Brainfuck's dialect
 genparser :: Symbols -> Parser [Instr]
 genparser sym =
-    let loop = between (string $ openl sym) (string $ closel sym) (Just . Loop <$> genparser sym)
+    let loop = between
+            (string $ openl sym)            -- Open loop
+            (string $ closel sym)           -- Close loop
+            (Just . Loop <$> genparser sym) -- Body
         instr = choice [
             parseInstr (incr sym) Incr,
             parseInstr (decr sym) Decr,
