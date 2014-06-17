@@ -8,39 +8,38 @@ import Data.Maybe (catMaybes)
 import Text.ParserCombinators.Parsec
 import Language.Brainfuck.Internals.Instructions
 
--- Encapsulate a parser
+-- | Encapsulate a parser
 type GenericParser = Parser [Instr]
 
--- Record type containing symbols of Brainfuck language
+-- | Record type containing symbols of Brainfuck language
 data Symbols = Symbols {
-    incr :: String,
-    decr :: String,
-    right :: String,
-    left :: String,
-    read :: String,
-    print :: String,
-    openl :: String,
-    closel :: String,
-    reserved :: String
+    incr :: String,     -- Symbol for +
+    decr :: String,     -- Symbol for -
+    right :: String,    -- Symbol for >
+    left :: String,     -- Symbol for <
+    read :: String,     -- Symbol for ,
+    print :: String,    -- Symbol for .
+    openl :: String,    -- Symbol for [
+    closel :: String,   -- Symbol for ]
+    reserved :: String  -- None of this is a comment
 }
 
--- Used to generate a parser for a Brainfuck's dialect
+-- | Used to generate a parser for a Brainfuck's dialect
 genparser :: Symbols -> GenericParser
-genparser sym =
-    let loop = between
+genparser sym = fmap catMaybes $ many $ try instr <|> try loop <|> comment
+    where
+        comment = noneOf (reserved sym) >> return Nothing
+        instr = choice [
+            parseInstr incr Incr,
+            parseInstr decr Decr,
+            parseInstr right MoveRight,
+            parseInstr left MoveLeft,
+            parseInstr read Read,
+            parseInstr print Print]
+        loop = between
             (string $ openl sym)            -- Open loop
             (string $ closel sym)           -- Close loop
             (Just . Loop <$> genparser sym) -- Body
-        instr = choice [
-            parseInstr (incr sym) Incr,
-            parseInstr (decr sym) Decr,
-            parseInstr (right sym) MoveRight,
-            parseInstr (left sym) MoveLeft,
-            parseInstr (read sym) Read,
-            parseInstr (print sym) Print]
-        comment = noneOf (reserved sym) >> return Nothing
-    in fmap catMaybes $ many $ try instr <|> try loop <|> comment
-    where
-        parseInstr str instr = try $ do
-            _ <- string str
-            return $ Just instr
+        parseInstr fun inst = try $ do
+            _ <- string $ fun sym
+            return $ Just inst

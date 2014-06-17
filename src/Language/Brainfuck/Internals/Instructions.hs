@@ -1,6 +1,7 @@
 
 module Language.Brainfuck.Internals.Instructions where
 
+-- | ADT for Brainfuck's instructions
 data Instr =
     Incr
     | Decr
@@ -12,4 +13,5 @@ data Instr =
     | Nope
     deriving Show
 
+-- | A program is just a list of instructions
 type Program = [Instr]
