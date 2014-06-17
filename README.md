@@ -1,6 +1,11 @@
-# Brainfuck, OokOok, Hodor
+# One Brainfuck interpreter to rule them all!
 
-Yet another interpreter for Brainfuck and Ook Ook, written in Haskell.
+Yet another interpreter for Brainfuck dialects:
+
+* Brainfuck
+* OokOok
+* WoopWoop
+* Hodor
 
 ## What is this Hodor language ?
 
