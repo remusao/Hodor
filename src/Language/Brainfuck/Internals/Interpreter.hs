@@ -58,9 +58,7 @@ run Read = liftIO getChar >>= modify . setVal . ord
 run Print = gets getVal >>= liftIO . putStr . return . chr
 run l@(Loop body) = do
     val <- gets getVal
-    if val == 0
-    then return ()
-    else mapM_ run body >> run l
+    unless (val == 0) $ mapM_ run body >> run l
 run _ = return ()
 
 -- | Interpret a complete program

@@ -1,11 +1,11 @@
 
 module Language.Brainfuck.OokOok where
 
-import Prelude hiding (read, print)
+import Prelude ()
 import Language.Brainfuck.Internals.GenericParser
 
 program :: GenericParser
-program = genparser $ Symbols {
+program = genparser Symbols {
     incr     = "Ook. Ook.",
     decr     = "Ook! Ook!",
     right    = "Ook. Ook?",

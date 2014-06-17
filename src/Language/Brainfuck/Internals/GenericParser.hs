@@ -1,7 +1,7 @@
 
 module Language.Brainfuck.Internals.GenericParser where
 
-import Prelude hiding (read, print)
+import Prelude hiding (print, read)
 
 import Control.Applicative ((<$>))
 import Data.Maybe (catMaybes)

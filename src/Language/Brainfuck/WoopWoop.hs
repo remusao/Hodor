@@ -1,11 +1,11 @@
 
 module Language.Brainfuck.WoopWoop where
 
-import Prelude hiding (read, print)
+import Prelude ()
 import Language.Brainfuck.Internals.GenericParser
 
 program :: GenericParser
-program = genparser $ Symbols {
+program = genparser Symbols {
     incr     = "Woop. Woop.",
     decr     = "Woop! Woop!",
     right    = "Woop. Woop?",
