@@ -20,6 +20,7 @@ library
         Language.Brainfuck.WoopWoop
         Language.Brainfuck.Instructions
         Language.Brainfuck.Interpreter
+        Language.Brainfuck.GenericParser
     build-depends:
           base >= 4.5 && < 4.8
         , text
