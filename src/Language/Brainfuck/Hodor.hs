@@ -2,12 +2,9 @@
 module Language.Brainfuck.Hodor where
 
 import Prelude hiding (read, print)
+import Language.Brainfuck.Internals.GenericParser
 
-import Text.ParserCombinators.Parsec
-import Language.Brainfuck.Instructions
-import Language.Brainfuck.GenericParser
-
-program :: Parser [Instr]
+program :: GenericParser
 program = genparser $ Symbols {
     incr     = "Hodor. Hodor.",
     decr     = "Hodor! Hodor!",

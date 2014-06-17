@@ -1,5 +1,5 @@
 
-module Language.Brainfuck.Instructions where
+module Language.Brainfuck.Internals.Instructions where
 
 data Instr =
     Incr

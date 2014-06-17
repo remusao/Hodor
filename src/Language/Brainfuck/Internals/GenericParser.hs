@@ -1,12 +1,15 @@
 
-module Language.Brainfuck.GenericParser where
+module Language.Brainfuck.Internals.GenericParser where
 
 import Prelude hiding (read, print)
 
 import Control.Applicative ((<$>))
 import Data.Maybe (catMaybes)
 import Text.ParserCombinators.Parsec
-import Language.Brainfuck.Instructions
+import Language.Brainfuck.Internals.Instructions
+
+-- Encapsulate a parser
+type GenericParser = Parser [Instr]
 
 -- Record type containing symbols of Brainfuck language
 data Symbols = Symbols {
@@ -22,7 +25,7 @@ data Symbols = Symbols {
 }
 
 -- Used to generate a parser for a Brainfuck's dialect
-genparser :: Symbols -> Parser [Instr]
+genparser :: Symbols -> GenericParser
 genparser sym =
     let loop = between
             (string $ openl sym)            -- Open loop

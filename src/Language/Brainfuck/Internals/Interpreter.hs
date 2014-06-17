@@ -1,9 +1,9 @@
 
-module Language.Brainfuck.Interpreter where
+module Language.Brainfuck.Internals.Interpreter where
 
 import Data.Char (ord, chr)
 import Control.Monad.State
-import Language.Brainfuck.Instructions
+import Language.Brainfuck.Internals.Instructions
 
 -- Memory
 -- It's a list zipper

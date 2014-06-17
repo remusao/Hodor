@@ -18,9 +18,9 @@ library
         Language.Brainfuck.OokOok
         Language.Brainfuck.Hodor
         Language.Brainfuck.WoopWoop
-        Language.Brainfuck.Instructions
-        Language.Brainfuck.Interpreter
-        Language.Brainfuck.GenericParser
+        Language.Brainfuck.Internals.Instructions
+        Language.Brainfuck.Internals.Interpreter
+        Language.Brainfuck.Internals.GenericParser
     build-depends:
           base >= 4.5 && < 4.8
         , text
