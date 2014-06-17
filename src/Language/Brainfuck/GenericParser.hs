@@ -3,7 +3,7 @@ module Language.Brainfuck.GenericParser where
 
 import Prelude hiding (read, print)
 
-import Control.Monad (liftM)
+import Control.Applicative ((<$>))
 import Data.Maybe (catMaybes)
 import Text.ParserCombinators.Parsec
 import Language.Brainfuck.Instructions
@@ -23,7 +23,7 @@ data Symbols = Symbols {
 -- Used to generate a parser for a Brainfuck's dialect
 genparser :: Symbols -> Parser [Instr]
 genparser sym =
-    let loop = between (string $ openl sym) (string $ closel sym) (genparser sym >>= return . Just . Loop)
+    let loop = between (string $ openl sym) (string $ closel sym) (Just . Loop <$> genparser sym)
         instr = choice [
             parseInstr (incr sym) Incr,
             parseInstr (decr sym) Decr,
@@ -32,7 +32,7 @@ genparser sym =
             parseInstr (read sym) Read,
             parseInstr (print sym) Print]
         comment = noneOf (reserved sym) >> return Nothing
-    in liftM catMaybes $ many $ try instr <|> try loop <|> comment
+    in fmap catMaybes $ many $ try instr <|> try loop <|> comment
     where
         parseInstr str instr = try $ do
             _ <- string str
