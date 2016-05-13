@@ -61,5 +61,5 @@ $ cabal build
 ## Run
 
 ```sh
-./brainfuck [Hodor|Brainfuck|OokOok|WoopWoop] file
+./brainfuck [Hodor|Brainfuck|OokOok|WoopWoop|Buffalo] file
 ```
