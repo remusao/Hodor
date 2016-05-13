@@ -34,8 +34,8 @@ instr = (try incr <|>
 loop :: Parser (Maybe Instr)
 loop = between open close (program >>= return . Just . Loop)
     where
-        open = (try $ parseOp "Ook!" "Ook?" Nope)
-        close = (try $ parseOp "Ook?" "Ook!" Nope)
+        open = (try $ parseOp "buffalo" "buffalo" Nope)
+        close = (try $ parseOp "Buuffalo" "Buuffalo" Nope)
 
 comment :: Parser (Maybe Instr)
 comment = noneOf "bBuffalo" >> return Nothing
