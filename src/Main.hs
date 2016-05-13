@@ -1,13 +1,10 @@
 
 module Main where
 
-import System.Console.GetOpt
 import System.Environment
-import qualified Data.Text.Lazy as LT
-import qualified Data.Text.Lazy.IO as LTIO
 import Text.Parsec.String as TP
 
-import Language.Brainfuck.Interpreter
+import Language.Brainfuck.Internals.Interpreter
 import qualified Language.Brainfuck.Brainfuck as BF
 import qualified Language.Brainfuck.OokOok as OO
 import qualified Language.Brainfuck.Hodor as H

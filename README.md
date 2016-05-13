@@ -1,6 +1,13 @@
-# Brainfuck, OokOok, Hodor
+# A Brainfuck interpreter to rule them all!
 
-Yet another interpreter for Brainfuck and Ook Ook, written in Haskell.
+Yet another interpreter for Brainfuck dialects:
+
+* Brainfuck
+* OokOok
+* WoopWoop
+* Hodor
+
+With a common backend, a custom parsers is needed to create a new dialect (with facilities to create a new one).
 
 ## What is this Hodor language ?
 
@@ -15,8 +22,8 @@ Here are the instructions:
 | Hodor! Hodor! | -         | Decrement the memory cell under the pointer                             |
 | Hodor! Hodor. | .         | Output the character signified by the cell at the pointer               |
 | Hodor. Hodor! | ,         | Input a character and store it in the cell at the pointer               |
-| Hodor. Hodor! | [         | Jump past the matching Hodor! Hodor. if the cell under the pointer is 0 |
-| Hodor! Hodor. | [         | Jump back to the matching Hodor! Hodor?                                 |
+| Hodor! Hodor? | [         | Jump past the matching Hodor? Hodor! if the cell under the pointer is 0 |
+| Hodor? Hodor! | ]         | Jump back to the matching Hodor! Hodor?                                 |
 
 ## Example
 
