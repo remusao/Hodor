@@ -25,6 +25,7 @@ library
                       Language.Brainfuck.Internals.Instructions
                       Language.Brainfuck.Internals.Interpreter
                       Language.Brainfuck.Internals.GenericParser
+                      Language.Brainfuck.Internals.CCodeGen
   build-depends:      base >= 4.7 && < 5
                     , text
                     , parsec
@@ -37,6 +38,7 @@ executable hodor
   build-depends:       base
                      , hodor
                      , parsec
+                     , optparse-generic
   default-language:   Haskell2010
 
 test-suite hodor-test

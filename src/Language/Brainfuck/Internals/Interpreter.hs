@@ -49,11 +49,11 @@ type Interpreter = StateT Memory IO
 
 -- | Execute one instruction
 run :: Instr -> Interpreter ()
-run Incr = modify incr
-run Decr = modify decr
-run MoveRight = modify right
-run MoveLeft = modify left
-run Read = liftIO getChar >>= modify . setVal . ord
+run Incr = modify' incr
+run Decr = modify' decr
+run MoveRight = modify' right
+run MoveLeft = modify' left
+run Read = liftIO getChar >>= modify' . setVal . ord
 run Print = gets getVal >>= liftIO . putStr . return . chr
 run l@(Loop body) = do
     val <- gets getVal

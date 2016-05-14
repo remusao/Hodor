@@ -3,7 +3,6 @@ module Language.Brainfuck.Internals.GenericParser where
 
 import Prelude hiding (print, read)
 
-import Control.Applicative ((<$>))
 import Data.Maybe (catMaybes)
 import Text.ParserCombinators.Parsec
 import Language.Brainfuck.Internals.Instructions
