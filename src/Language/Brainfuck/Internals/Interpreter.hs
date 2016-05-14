@@ -6,8 +6,7 @@ import Control.Monad.State
 import Language.Brainfuck.Internals.Instructions
 
 -- | Memory is just a list zipper
-type Word = Int
-data Memory = Memory [Word] Word [Word]
+data Memory = Memory [Int] Int [Int]
 
 empty :: Memory
 empty = Memory zeros 0 zeros
@@ -38,11 +37,11 @@ right r@(Memory _ _ []) = r
 right (Memory l v (r:rs)) = Memory (v:l) r rs
 
 -- | Returns current value
-getVal :: Memory -> Word
+getVal :: Memory -> Int
 getVal (Memory _ v _) = v
 
 -- | Set current value
-setVal :: Word -> Memory -> Memory
+setVal :: Int -> Memory -> Memory
 setVal new_v (Memory l _ r) = Memory l new_v r
 
 -- | Interpreter internal state

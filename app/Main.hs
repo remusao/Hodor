@@ -1,8 +1,7 @@
-
 module Main where
 
 import System.Environment
-import Text.Parsec.String as TP
+import Text.Parsec.String (parseFromFile)
 
 import Language.Brainfuck.Internals.Interpreter
 import qualified Language.Brainfuck.Brainfuck as BF
