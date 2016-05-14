@@ -1,0 +1,53 @@
+name:                hodor
+version:             0.1.0.0
+synopsis:            Generic brainfuck interpreter
+description:         Please see README.md
+homepage:            https://github.com/remusao/Hodor#readme
+license:             BSD3
+license-file:        LICENSE
+author:              Rémi Berson
+maintainer:          https://github.com/remusao
+copyright:           2016 Rémi Berson
+category:            Language
+build-type:          Simple
+cabal-version:       >=1.10
+
+library
+  ghc-options:        -O2 -Wall -threaded -rtsopts -with-rtsopts=-N
+  default-language:   Haskell2010
+  hs-source-dirs:     src
+  exposed-modules:
+                      Language.Brainfuck.Brainfuck
+                      Language.Brainfuck.OokOok
+                      Language.Brainfuck.Hodor
+                      Language.Brainfuck.WoopWoop
+                      Language.Brainfuck.Buffalo
+                      Language.Brainfuck.Internals.Instructions
+                      Language.Brainfuck.Internals.Interpreter
+                      Language.Brainfuck.Internals.GenericParser
+  build-depends:      base >= 4.7 && < 5
+                    , text
+                    , parsec
+                    , mtl
+
+executable hodor
+  hs-source-dirs:      app
+  main-is:            Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , hodor
+                     , parsec
+  default-language:   Haskell2010
+
+test-suite hodor-test
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             Spec.hs
+  build-depends:       base
+                     , hodor
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  default-language:    Haskell2010
+
+source-repository head
+  type:     git
+  location: https://github.com/remusao/Hodor
