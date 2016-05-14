@@ -6,8 +6,9 @@ Yet another interpreter for Brainfuck dialects:
 * OokOok
 * WoopWoop
 * Hodor
+* Buffalo
 
-With a common backend, a custom parsers is needed to create a new dialect (with facilities to create a new one).
+With a common backend, so that no new parser is needed to create a new dialect.
 
 ## What is this Hodor language ?
 
@@ -51,15 +52,20 @@ Hodor! Hodor. Hodor. Hodor? Hodor. Hodor? Hodor. Hodor. Hodor! Hodor.
 
 ## Build
 
+First you must have `stack` [installed](http://docs.haskellstack.org/en/stable/install_and_upgrade/).
+On recent Ubuntu (16.04) it can be installed with:
+
 ```sh
-$ cabal sandbox init
-$ cabal install --only-dependencies
-$ cabal configure
-$ cabal build
+apt-get install haskell-stack
+```
+
+Then compiling is very easy:
+```sh
+stack build
 ```
 
 ## Run
 
 ```sh
-./brainfuck [Hodor|Brainfuck|OokOok|WoopWoop|Buffalo] file
+stack exec hodor -- [Hodor|Brainfuck|OokOok|WoopWoop|Buffalo] file
 ```
