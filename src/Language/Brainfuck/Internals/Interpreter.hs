@@ -56,24 +56,6 @@ run :: Instr -> Interpreter ()
 run (Incr i)  = modify' (incr i)
 run (Decr i)  = modify' (decr i)
 run (Set i)   = modify' (set i)
-run (Mul n y) = do
-    -- Get value of current cell
-    val <- gets getVal
-    -- Shift ptr by `n`
-    modify' ((!! n) . iterate right)
-    -- Increase value of new current case by `val`
-    modify' (set (val * y))
-    -- Return at original position
-    modify' ((!! n) . iterate left)
-run (Copy n)  = do
-    -- Get value of current cell
-    val <- gets getVal
-    -- Shift ptr by `n`
-    modify' ((!! n) . iterate right)
-    -- Increase value of new current case by `val`
-    modify' (incr val)
-    -- Return at original position
-    modify' ((!! n) . iterate left)
 run (MoveRight n) = modify' ((!! n) . iterate right)
 run (MoveLeft n) = modify' ((!! n) . iterate left)
 run Read = liftIO getChar >>= modify' . setVal . ord

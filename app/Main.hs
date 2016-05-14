@@ -55,7 +55,7 @@ main = do
         Left err -> putStr "parse error at " >> print err
         Right x -> if compile args
                       then Compiler.compile (opti x) "out.c"
-                      else Interpreter.interpret (opti x)
+                      else Interpreter.interpret x
     where
         parser lang = case lang of
             Brainfuck -> BF.program
@@ -63,4 +63,4 @@ main = do
             Hodor -> H.program
             WoopWoop -> W.program
             Buffalo -> B.program
-        opti = Contract.optim . Cancel.optim . ClearLoop.optim -- . CopyLoop.optim
+        opti = Contract.optim . Cancel.optim . ClearLoop.optim . CopyLoop.optim
