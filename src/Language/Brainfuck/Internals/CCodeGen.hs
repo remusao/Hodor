@@ -37,14 +37,18 @@ emptyProgram = CProgram
 
 
 gen :: Instr -> Compiler
-gen (Incr i) = modify' . addLine . format "*ptr += {};" $ Only i
-gen (Decr i) = modify' . addLine . format "*ptr += {};" $ Only i
+gen (Incr i) = modify' . addLine . format "mem[ptr] += {};" $ Only i
+gen (Decr i) = modify' . addLine . format "mem[ptr] -= {};" $ Only i
+gen (Set i) = modify' . addLine . format "mem[ptr] = {};" $ Only i
+gen (Mul x 1) = modify' . addLine . format "mem[ptr + {}] += mem[ptr];" $ Only x
+gen (Mul x y) = modify' . addLine . format "mem[ptr + {}] += mem[ptr] * {};" $ (x, y)
+gen (Copy n) = modify' . addLine . format "mem[ptr + {}] = mem[ptr]" $ Only n
 gen (MoveRight n) = modify' . addLine . format "ptr += {};" $ Only n
-gen (MoveLeft n) = modify' . addLine . format "ptr += {};" $ Only n
-gen Read = modify' (addLine "*ptr = getchar();")
-gen Print = modify' (addLine "putchar(*ptr);")
+gen (MoveLeft n) = modify' . addLine . format "ptr -= {};" $ Only n
+gen Read = modify' (addLine "mem[ptr] = getchar();")
+gen Print = modify' (addLine "putchar(mem[ptr]);")
 gen (Loop body) = do
-    modify' (addLine "while (*ptr) {")
+    modify' (addLine "while (mem[ptr]) {")
     modify' incrIndent
     mapM_ gen body
     modify' decrIndent
@@ -61,8 +65,8 @@ wrapCode program = T.unlines
     [ "#include <stdio.h>"
     , ""
     , "int main() {"
-    , "    char array[30000] = {0};"
-    , "    char *ptr = array;"
+    , "    char mem[30000] = {0};"
+    , "    int ptr = 0;"
     , program
     , "}"
     ]

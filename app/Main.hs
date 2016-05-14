@@ -14,6 +14,11 @@ import Text.Parsec.String (parseFromFile)
 import qualified Language.Brainfuck.Internals.Interpreter as Interpreter
 import qualified Language.Brainfuck.Internals.CCodeGen as Compiler
 
+import qualified Language.Brainfuck.Internals.Optim.Contract as Contract
+import qualified Language.Brainfuck.Internals.Optim.Cancel as Cancel
+import qualified Language.Brainfuck.Internals.Optim.ClearLoop as ClearLoop
+import qualified Language.Brainfuck.Internals.Optim.CopyLoop as CopyLoop
+
 import qualified Language.Brainfuck.Brainfuck as BF
 import qualified Language.Brainfuck.OokOok as OO
 import qualified Language.Brainfuck.Hodor as H
@@ -48,7 +53,9 @@ main = do
     result <- parseFromFile (parser . dialect $ args) (file args)
     case result of
         Left err -> putStr "parse error at " >> print err
-        Right x -> if compile args then Compiler.compile x "out.c" else Interpreter.interpret x
+        Right x -> if compile args
+                      then Compiler.compile (opti x) "out.c"
+                      else Interpreter.interpret (opti x)
     where
         parser lang = case lang of
             Brainfuck -> BF.program
@@ -56,3 +63,4 @@ main = do
             Hodor -> H.program
             WoopWoop -> W.program
             Buffalo -> B.program
+        opti = Contract.optim . Cancel.optim . ClearLoop.optim -- . CopyLoop.optim

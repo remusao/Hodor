@@ -1,0 +1,27 @@
+
+module Language.Brainfuck.Internals.Optim.CopyLoop where
+
+import Language.Brainfuck.Internals.Instructions
+
+-- | Loop is optimizable only if it contains only basic operations:
+-- * Incr
+-- * Decr
+-- * MoveLeft
+-- * MoveRight
+optimizableLoop :: [Instr] -> Bool
+optimizableLoop [] = True
+optimizableLoop (Incr _:t) = True && optimizableLoop t
+optimizableLoop (Decr _:t) = True && optimizableLoop t
+optimizableLoop (MoveLeft _:t) = True && optimizableLoop t
+optimizableLoop (MoveRight _:t) = True && optimizableLoop t
+optimizableLoop _ = False
+
+
+interpret
+
+optim :: Program -> Program
+optim [] = []
+optim (Loop body:t)
+    | onlyArithmeticOps body = -- apply opti
+    | otherwise = Loop (optim body) : optim t
+optim (instr:t) = instr:optim t

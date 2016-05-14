@@ -2,14 +2,18 @@
 module Language.Brainfuck.Internals.Instructions where
 
 -- | ADT for Brainfuck's instructions
+type Offset = Int
 data Instr =
       Incr Int
     | Decr Int
-    | MoveRight Int
-    | MoveLeft Int
+    | MoveRight Offset
+    | MoveLeft Offset
     | Loop [Instr]
     | Read
     | Print
+    | Set Int
+    | Copy Offset
+    | Mul Int Int
     | Nope
     deriving Show
 

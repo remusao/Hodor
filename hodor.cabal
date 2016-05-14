@@ -26,7 +26,12 @@ library
                       Language.Brainfuck.Internals.Interpreter
                       Language.Brainfuck.Internals.GenericParser
                       Language.Brainfuck.Internals.CCodeGen
+                      Language.Brainfuck.Internals.Optim.Contract
+                      Language.Brainfuck.Internals.Optim.Cancel
+                      Language.Brainfuck.Internals.Optim.ClearLoop
+                      Language.Brainfuck.Internals.Optim.CopyLoop
   build-depends:      base >= 4.7 && < 5
+                    , containers
                     , mtl
                     , parsec
                     , text
