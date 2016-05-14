@@ -13,12 +13,12 @@ empty = Memory zeros 0 zeros
     where zeros = repeat 0
 
 -- | Increment current value in memory
-incr :: Memory -> Memory
-incr (Memory l v r) = Memory l (v + 1) r
+incr :: Int -> Memory -> Memory
+incr i (Memory l v r) = Memory l (v + i) r
 
 -- | Decrement current value in memory
-decr :: Memory -> Memory
-decr (Memory l v r) = Memory l (v - 1) r
+decr :: Int -> Memory -> Memory
+decr i (Memory l v r) = Memory l (v - i) r
 
 -- | Shift zipper to left of one position
 --   If we are already at the left, don't move
@@ -49,10 +49,10 @@ type Interpreter = StateT Memory IO
 
 -- | Execute one instruction
 run :: Instr -> Interpreter ()
-run Incr = modify' incr
-run Decr = modify' decr
-run MoveRight = modify' right
-run MoveLeft = modify' left
+run (Incr i) = modify' (incr i)
+run (Decr i) = modify' (decr i)
+run (MoveRight n) = modify' ((!! n) . iterate right)
+run (MoveLeft n) = modify' ((!! n) . iterate left)
 run Read = liftIO getChar >>= modify' . setVal . ord
 run Print = gets getVal >>= liftIO . putStr . return . chr
 run l@(Loop body) = do

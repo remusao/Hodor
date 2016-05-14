@@ -3,10 +3,10 @@ module Language.Brainfuck.Internals.Instructions where
 
 -- | ADT for Brainfuck's instructions
 data Instr =
-    Incr
-    | Decr
-    | MoveRight
-    | MoveLeft
+      Incr Int
+    | Decr Int
+    | MoveRight Int
+    | MoveLeft Int
     | Loop [Instr]
     | Read
     | Print

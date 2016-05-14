@@ -29,10 +29,10 @@ genparser sym = fmap catMaybes $ many $ try instr <|> try loop <|> comment
     where
         comment = noneOf (reserved sym) >> return Nothing
         instr = choice [
-            parseInstr incr Incr,
-            parseInstr decr Decr,
-            parseInstr right MoveRight,
-            parseInstr left MoveLeft,
+            parseInstr incr (Incr 1),
+            parseInstr decr (Decr 1),
+            parseInstr right (MoveRight 1),
+            parseInstr left (MoveLeft 1),
             parseInstr read Read,
             parseInstr print Print]
         loop = between
