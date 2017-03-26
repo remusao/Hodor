@@ -1,7 +1,6 @@
-resolver: lts-5.16
+resolver: lts-8.5
 packages:
 - '.'
-extra-deps:
-- optparse-generic-1.1.0
+extra-deps: []
 flags: {}
 extra-package-dbs: []
